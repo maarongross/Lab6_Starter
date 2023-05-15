@@ -16,7 +16,8 @@ class RecipeCard extends HTMLElement {
     const styleElement = document.createElement('style');
     console.log(styleElement);
     // A4. TODO - Insert all of the styles from cardTemplate.html into the <style> element you just made
-    styleElement.textContent = `* {
+    styleElement.textContent = // following string is copied from cardTemplate.html
+    `* {
       font-family: sans-serif;
       margin: 0;
       padding: 0;
@@ -122,13 +123,26 @@ class RecipeCard extends HTMLElement {
     if (!data) return;
 
     // A6. TODO - Select the <article> we added to the Shadow DOM in the constructor
-    shadowArticle = this.shadowRoot.children[0];
-    console.log(shadowArticle);
+    let article = this.shadowRoot.querySelector('article');
     // A7. TODO - Set the contents of the <article> with the <article> template given in
     //           cardTemplate.html and the data passed in (You should only have one <article>,
     //           do not nest an <article> inside another <article>). You should use Template
     //           literals (tempalte strings) and element.innerHTML for this.
-    
+    article.innerHTML =
+    '<img src="' + data["imgSrc"] + '" alt="' + data["imgAlt"] + '">' +
+    '<p class="title">' +
+    '<a href="' + data["titleLnk"] + '">' + data["titleTxt"] + '"</a>' +
+    '</p>' +
+    '<p class="organization">' + data["organization"] + '</p>' +
+    '<div class="rating">' +
+    '<span>' + data["rating"] + '</span>' +
+    '<img src="/assets/images/icons/' + data["rating"] + '-star.svg" alt="' + data["rating"] + ' stars">' +
+    '<span>(' + data["numRatings"] + ')</span>' +
+    '</div>' +
+    '<time>' + data["lengthTime"] + '</time>' +
+    '<p class="ingredients">' +
+    data["ingredients"] +
+    '</p>';
   }
 }
 
